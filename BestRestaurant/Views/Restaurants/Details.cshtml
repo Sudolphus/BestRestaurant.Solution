@@ -7,6 +7,10 @@
 <h2>Restaurant Details</h2>
 <hr />
 <h3>@Html.DisplayFor(model => model.Name)</h3>
+<h4>@Html.DisplayFor(model => model.StreetAddress)</h4>
+<h4>@Html.DisplayFor(model => model.City) @Html.DisplayFor(model => model.State)</h4>
+<h4>@Html.DisplayFor(model => model.Phone)</h4>
+<h4>@Html.DisplayFor(model => model.Website)</h4>
 
 <p>@Html.ActionLink("Back to Restaurant List", "Index")</p>
 <p>@Html.ActionLink("Edit Restaurant", "Edit", new {id = Model.RestaurantId })</p>
