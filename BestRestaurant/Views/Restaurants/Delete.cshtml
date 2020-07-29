@@ -1,0 +1,16 @@
+@{
+  Layout = "_Layout"
+}
+
+@model BestRestaurant.Models.Restaurant
+
+<h2>Delete Restaurant</h2>
+
+@Html.DisplayFor(model => model.Name)
+@using (Html.BeginForm())
+{
+  <input type="submit" value="Delete" class="btn btn-danger" />
+}
+
+<p>@Html.ActionLink("Back to Restaurant List", "Index")</p>
+<p>@Html.ActionLink("Back to Home", "Index", "Home")</p>
