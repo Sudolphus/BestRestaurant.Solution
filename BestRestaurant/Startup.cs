@@ -31,7 +31,7 @@ namespace BestRestaurant
     {
       app.UseStaticFiles();
 
-      app.UseDeceloperExceptionPage();
+      app.UseDeveloperExceptionPage();
 
       app.UseMvc(routes =>
       {
