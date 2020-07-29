@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout"
+}
+
+@model BestRestaurant.Models.Restaurant
+
+<h4>Add a New Restaurant</h4>
+
+@using (Html.BeginForm())
+{
+  <div class="form-group">
+    @Html.LabelFor(model => model.Name)
+    @Html.TextBoxFor(model => model.Name, new { @class = "form-control"})
+  </div>
+
+  <div class="form-group">
+    @Html.LabelFor(model => model.Cuisine)
+    @Html.DropDownList("CuisineId", new { @class = "form-control"})
+  </div>
+}
+
+<p>@Html.ActionLink("Restaurants", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
