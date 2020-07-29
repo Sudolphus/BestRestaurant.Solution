@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +17,7 @@ namespace BestRestaurant.Controllers
 
     public ActionResult Index()
     {
-      IEnumerable<Cuisine> model = _db.Cuisines.ToList().OrderBy(cuisines => cuisines.Name);
+      List<Cuisine> model = _db.Cuisines.ToList();
       return View(model);
     }
 
@@ -38,7 +37,6 @@ namespace BestRestaurant.Controllers
     public ActionResult Details(int id)
     {
       Cuisine thisCuisine = _db.Cuisines.Include(cuisine => cuisine.Restaurants).FirstOrDefault(cuisines => cuisines.CuisineId == id);
-      // ViewBag.RestaurantList = _db.Restaurants.Where(restaurants => restaurants.CuisineId == id).ToList();
       return View(thisCuisine);
     }
 

@@ -14,7 +14,7 @@ namespace BestRestaurant
     {
       var builder = new ConfigurationBuilder()
         .SetBasePath(env.ContentRootPath)
-        .AddEnvironmentVariables();
+        .AddJsonFile("appsettings.json");
       Configuration = builder.Build();
     }
 
