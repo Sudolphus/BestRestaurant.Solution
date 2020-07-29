@@ -1,5 +1,5 @@
 @{
-  Layout = "_Layout"
+  Layout = "_Layout";
 }
 
 @model BestRestaurant.Models.Restaurant
@@ -15,7 +15,7 @@
 
   <div class="form-group">
     @Html.LabelFor(model => model.Cuisine)
-    @Html.DropDownList("CuisineId", new { @class = "form-control"})
+    @Html.DropDownList("CuisineId")
   </div>
 }
 

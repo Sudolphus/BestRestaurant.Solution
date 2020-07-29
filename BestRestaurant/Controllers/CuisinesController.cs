@@ -18,7 +18,7 @@ namespace BestRestaurant.Controllers
 
     public ActionResult Index()
     {
-      List<Cuisine> model = _db.Categories.ToList().OrderBy(cuisines => cuisines.Name);
+      IEnumerable<Cuisine> model = _db.Cuisines.ToList().OrderBy(cuisines => cuisines.Name);
       return View(model);
     }
 
@@ -37,8 +37,8 @@ namespace BestRestaurant.Controllers
 
     public ActionResult Details(int id)
     {
-      Cuisine thisCuisine = _db.Cuisines.FirstOrDefault(cuisines => cuisines.CuisineId == id);
-      ViewBag.RestaurantList = _db.Restaurants.Where(restaurants => restaurants.CuisineId == id).ToList();
+      Cuisine thisCuisine = _db.Cuisines.Include(cuisine => cuisine.Restaurants).FirstOrDefault(cuisines => cuisines.CuisineId == id);
+      // ViewBag.RestaurantList = _db.Restaurants.Where(restaurants => restaurants.CuisineId == id).ToList();
       return View(thisCuisine);
     }
 
@@ -49,7 +49,7 @@ namespace BestRestaurant.Controllers
     }
 
     [HttpPost]
-    public ActionResult Edit(int id)
+    public ActionResult Edit(Cuisine cuisine)
     {
       _db.Entry(cuisine).State = EntityState.Modified;
       _db.SaveChanges();

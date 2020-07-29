@@ -1,13 +1,13 @@
 @{
-  Layout = "_Layout"
+  Layout = "_Layout";
 }
 
 @using BestRestaurant.Models;
-@model BestRestaurant.Models.Category
+@* @model BestRestaurant.Models.Cuisine *@
 
 <h4>Cuisine Details</h4>
 <hr />
-<p><strong><center>@Html.DisplayFor(model => model.Name)</center></strong></p>
+<p><strong><center>@Model.Name</center></strong></p>
 
 <ul>
 @foreach (Restaurant restaurant in @Model.Restaurants)

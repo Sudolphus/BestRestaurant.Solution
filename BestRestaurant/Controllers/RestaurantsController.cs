@@ -7,7 +7,7 @@ using BestRestaurant.Models;
 
 namespace BestRestaurant.Controllers
 {
-  public class RestaurantController : Controller
+  public class RestaurantsController : Controller
   {
     private readonly BestRestaurantContext _db;
 
