@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,8 +37,8 @@ namespace BestRestaurant.Controllers
 
     public ActionResult Details(int id)
     {
-      Cuisine thisCuisine = _db.Cuisines.FirstOrDefault(cuisines => cuisines.CuisineId = id);
-      ViewBag.RestaurantList = new List<Restaurant>(_db.Restaurants.Includes(restaurants => restaurants.CuisineId == id));      
+      Cuisine thisCuisine = _db.Cuisines.FirstOrDefault(cuisines => cuisines.CuisineId == id);
+      ViewBag.RestaurantList = _db.Restaurants.Where(restaurants => restaurants.CuisineId == id).ToList();
       return View(thisCuisine);
     }
 
