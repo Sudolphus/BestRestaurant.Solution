@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using BestRestaurant.Models;
 
 namespace BestRestaurant.Controllers
@@ -85,7 +86,8 @@ namespace BestRestaurant.Controllers
 
     public ActionResult Results(string name)
     {
-      List<Restaurant> model = _db.Restaurants.Include(restaurants => restaurants.Cuisine).Where(restaurants => restaurants.Name == name).ToList();
+      Regex nameRX = new Regex(name, RegexOptions.IgnoreCase);
+      List<Restaurant> model = _db.Restaurants.Include(restaurants => restaurants.Cuisine).Where(restaurants => nameRX.IsMatch(restaurants.Name)).ToList();
       return View(model);
     }
   }
