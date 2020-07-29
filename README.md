@@ -1,18 +1,21 @@
-# _Project Name_
-Epicodus Week ?  
-Version 1.0 - Date 
+# _Best Restaurant in Town_
+Epicodus Week 10  
+Version 1.0 - Date July 27th, 2020
 
 ## _Project Description_
+Practice in many to one database relationships.
 
 ## _Contributors_
 JohnNils Olson  
+Micheal Hansen
 
 ## _Usage_
-
+A website where users can add their favorite restaurants based on the type of cuisine they offer.
 
 ## _Behavior Specifications_
 | Behavior | Input | Output |
 | ---- | ---- | ---- |
+| 
 
 
 ## _Technologies Used_
