@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-width: 400px;
 }
 
 .sidenav {
@@ -25,4 +26,32 @@
 .sidenav a:hover {
   background-color: grey;
   color: black;
+}
+
+.sidenav img {
+  height: 100px;
+  width: 100px;
+  position: fixed;
+  top: 30px;
+  left: 50px;
+}
+
+.link-box {
+  position: fixed;
+  top: 160px;
+  width: 200px;
+}
+
+.form-group {
+  width: 400px;
+}
+
+.float-right {
+  float: right;
+}
+
+.text-box {
+  width: 400px;
+  margin: 20px;
+  float: left;
 }
