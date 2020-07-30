@@ -79,15 +79,26 @@ namespace BestRestaurant.Controllers
     }
 
     [HttpPost]
-    public ActionResult Search(string name)
+    public ActionResult Search(string name, string cuisine)
     {
-      return RedirectToAction("Results", new { name = name });
+      return RedirectToAction("Results", new { name = name, cuisine = cuisine });
     }
 
-    public ActionResult Results(string name)
+    public ActionResult Results(string name, string cuisine)
     {
-      Regex nameRX = new Regex(name, RegexOptions.IgnoreCase);
-      List<Restaurant> model = _db.Restaurants.Include(restaurants => restaurants.Cuisine).Where(restaurants => nameRX.IsMatch(restaurants.Name)).ToList();
+      IQueryable<Restaurant> query = _db.Restaurants.Include(restaurants => restaurants.Cuisine);
+      if (name != "" && name != null)
+      {
+        Regex nameRX = new Regex(name, RegexOptions.IgnoreCase);
+        query = query.Where(restaurants => nameRX.IsMatch(restaurants.Name));
+      }
+      if (cuisine != "" && cuisine != null)
+      {
+        Regex cuisineRx = new Regex(cuisine, RegexOptions.IgnoreCase);
+        query = query.Where(restaurants => cuisineRx.IsMatch(restaurants.Cuisine.Name));
+      }
+      List<Restaurant> model = query.ToList();
+      // List<Restaurant> model = _db.Restaurants.Include(restaurants => restaurants.Cuisine).Where(restaurants => nameRX.IsMatch(restaurants.Name)).ToList();
       return View(model);
     }
   }
