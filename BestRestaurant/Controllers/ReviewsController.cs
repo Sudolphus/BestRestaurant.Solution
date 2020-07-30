@@ -17,13 +17,16 @@ namespace BestRestaurant.Controllers
     }
     public ActionResult Create(int id)
     {
-      ViewBag.RestaurantId = id;
+      Restaurant restaurant = _db.Restaurants.FirstOrDefault(restaurants => restaurants.RestaurantId == id);
+      ViewBag.Restaurant = restaurant;
       return View();
     }
     [HttpPost]
-    public ActionResult Create(Review review)
+    public ActionResult Create(string reviewText, string restaurantId)
     {
-      _db.Reviews.Add(review);
+      Restaurant restaurant = _db.Restaurants.FirstOrDefault(restaurants => restaurants.RestaurantId == int.Parse(restaurantId));
+      Review review = new Review(reviewText);
+      restaurant.Reviews.Add(review);
       _db.SaveChanges();
       return RedirectToAction("Details", "Restaurants", new { id = review.RestaurantId });
     }

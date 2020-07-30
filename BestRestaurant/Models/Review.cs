@@ -6,5 +6,10 @@ namespace BestRestaurant.Models
     public string ReviewText { get; set; }
     public int RestaurantId { get; set; }
     public virtual Restaurant Restaurant { get; set; }
+
+    public Review(string reviewText)
+    {
+      ReviewText = reviewText;
+    }
   }
 }

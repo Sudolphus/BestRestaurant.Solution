@@ -2,6 +2,7 @@
   Layout = "_Layout";
 }
 
+@using BestRestaurant.Models;
 @model BestRestaurant.Models.Restaurant
 
 <h2>Restaurant Details</h2>
@@ -11,6 +12,15 @@
 <h4>@Html.DisplayFor(model => model.City) @Html.DisplayFor(model => model.State)</h4>
 <h4>@Html.DisplayFor(model => model.Phone)</h4>
 <h4>@Html.DisplayFor(model => model.Website)</h4>
+@if (Model.Reviews.Count > 0)
+{
+  <ul>
+  @foreach(Review review in Model.Reviews)
+  {
+    <li>@review.ReviewText</li>
+  }
+  </ul>
+}
 <p>@Html.ActionLink("Edit Restaurant", "Edit", new {id = Model.RestaurantId })</p>
 <p>@Html.ActionLink("Delete Restaurant", "Delete", new {id = Model.RestaurantId })</p>
 <p>@Html.ActionLink("Add Review", "Create", "Reviews", new {id = Model.RestaurantId })</p>
