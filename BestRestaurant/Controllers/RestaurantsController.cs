@@ -79,25 +79,37 @@ namespace BestRestaurant.Controllers
     }
 
     [HttpPost]
-    public ActionResult Search(string name, string cuisine)
+    public ActionResult Search(string name, string cuisine, string city)
     {
-      return RedirectToAction("Results", new { name = name, cuisine = cuisine });
+      return RedirectToAction("Results", new { name = name, cuisine = cuisine, city = city });
     }
 
-    public ActionResult Results(string name, string cuisine)
+    public ActionResult Results(string name, string cuisine, string city)
     {
       IQueryable<Restaurant> query = _db.Restaurants.Include(restaurants => restaurants.Cuisine);
       if (name != "" && name != null)
       {
-        Regex nameRX = new Regex(name, RegexOptions.IgnoreCase);
-        query = query.Where(restaurants => nameRX.IsMatch(restaurants.Name));
+        Regex nameRx = new Regex(name, RegexOptions.IgnoreCase);
+        query = query.Where(restaurants => nameRx.IsMatch(restaurants.Name));
       }
       if (cuisine != "" && cuisine != null)
       {
         Regex cuisineRx = new Regex(cuisine, RegexOptions.IgnoreCase);
         query = query.Where(restaurants => cuisineRx.IsMatch(restaurants.Cuisine.Name));
       }
-      List<Restaurant> model = query.ToList();
+      if (city != "" && city != null)
+      {
+        Regex cityRx = new Regex(city, RegexOptions.IgnoreCase);
+        query = query.Where(restaurants => cityRx.IsMatch(restaurants.City));
+      }
+      List<Restaurant> model = new List<Restaurant>();
+      try
+      {
+        model = query.ToList();
+      }
+      catch
+      {
+      }
       // List<Restaurant> model = _db.Restaurants.Include(restaurants => restaurants.Cuisine).Where(restaurants => nameRX.IsMatch(restaurants.Name)).ToList();
       return View(model);
     }
