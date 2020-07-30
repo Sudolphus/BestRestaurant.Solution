@@ -1,0 +1,16 @@
+@{
+  Layout = "_Layout";
+}
+
+@model BestRestaurant.Models.Review
+
+<h4>Add a Review</h4>
+@using (Html.BeginForm())
+{
+  <div class="form-group">
+    @Html.HiddenFor(model => model.RestaurantId, new { Value = @ViewBag.RestaurantId })
+    @Html.LabelFor(model => model.ReviewText)
+    @Html.TextBoxFor(model => model.ReviewText, new { @class="form-control", @required=true })
+  </div>
+  <input type="Submit" value="Add Review" class="btn btn-success" />
+}
