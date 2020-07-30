@@ -2,16 +2,35 @@
   Layout = "_Layout";
 }
 
+@using BestRestaurant.Models;
 @model BestRestaurant.Models.Restaurant
 
-<h2>Restaurant Details</h2>
-<hr />
-<h3>@Html.DisplayFor(model => model.Name)</h3>
-<h4>@Html.DisplayFor(model => model.StreetAddress)</h4>
-<h4>@Html.DisplayFor(model => model.City) @Html.DisplayFor(model => model.State)</h4>
-<h4>@Html.DisplayFor(model => model.Phone)</h4>
-<h4>@Html.DisplayFor(model => model.Website)</h4>
-
-<p>@Html.ActionLink("Back to Restaurant List", "Index")</p>
-<p>@Html.ActionLink("Edit Restaurant", "Edit", new {id = Model.RestaurantId })</p>
-<p>@Html.ActionLink("Delete Restaurant", "Delete", new {id = Model.RestaurantId })</p>
+<div class="name">
+  <h2>@Html.DisplayFor(model => model.Name)</h2>
+</div>
+<div class="restaurant-details">
+  <h4>@Html.DisplayFor(model => model.StreetAddress)</h4>
+  <h4>@Html.DisplayFor(model => model.City) @Html.DisplayFor(model => model.State)</h4>
+  <h4>@Html.DisplayFor(model => model.Phone)</h4>
+  <h4>@Html.DisplayFor(model => model.Website)</h4>
+</div>
+<div class="restaurant-link-bar">
+  <p>@Html.ActionLink("Edit Restaurant", "Edit", new {id = Model.RestaurantId })</p>
+  <p>@Html.ActionLink("Delete Restaurant", "Delete", new {id = Model.RestaurantId })</p>
+  <p>@Html.ActionLink("Add Review", "Create", "Reviews", new {id = Model.RestaurantId })</p>
+</div>
+<div class="name">
+  <h2>Reviews</h2>
+</div>
+@if (Model.Reviews.Count > 0)
+{
+  @foreach(Review review in Model.Reviews)
+  {
+    <div class="review">
+      <blockquote class="blockquote">
+        <p>@review.ReviewText</p>
+        <footer class="blockquote-footer">@review.ReviewerName, <cite title="Source Title">@review.ReviewScore</cite></footer>
+      </blockquote>
+    </div>
+  }
+}
