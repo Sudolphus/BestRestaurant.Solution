@@ -22,10 +22,10 @@ namespace BestRestaurant.Controllers
       return View();
     }
     [HttpPost]
-    public ActionResult Create(string reviewText, string restaurantId)
+    public ActionResult Create(string reviewText, string reviewerName, string reviewScore, string restaurantId)
     {
       Restaurant restaurant = _db.Restaurants.FirstOrDefault(restaurants => restaurants.RestaurantId == int.Parse(restaurantId));
-      Review review = new Review(reviewText);
+      Review review = new Review(reviewText, reviewerName, int.Parse(reviewScore));
       restaurant.Reviews.Add(review);
       _db.SaveChanges();
       return RedirectToAction("Details", "Restaurants", new { id = review.RestaurantId });
